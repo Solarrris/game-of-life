@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Game Of Life</title>
 </head>
 <body>
+    <h1>Canvas Project - Game of Life (Conway's Game of Life)</h1>
+    <p>Click and drag your mouse inside the canvas to select the living cells (in white).</p>
+    <p>Once you have your first generation, click the start button to generate the future generations of living cells.</p>
     <canvas></canvas>
-    <button id="start-game">Start Game</button>
+    <div id="buttons">
+        <button id="start-game">Start Game</button>
+        <button id="reset-game">Reset Game</button>
+    </div>
     <script src="/app.js"></script>
 </body>
 </html>

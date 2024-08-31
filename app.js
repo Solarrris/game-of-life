@@ -3,7 +3,9 @@ const CANVAS_HEIGHT = 800;
 const PIXEL_LENGTH = 20;
 
 const canvas = document.querySelector("canvas");
+const buttonsDiv = document.getElementById("buttons");
 const startButton = document.getElementById("start-game");
+const resetButton = document.getElementById("reset-game");
 
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
@@ -12,6 +14,7 @@ const context = canvas.getContext("2d");
 
 let grid = [];
 let tileValueToPaint = 1;
+let interval;
 
 document.addEventListener("DOMContentLoaded", function () {
     createGrid();
@@ -19,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 startButton.addEventListener("click", startGame);
+resetButton.addEventListener("click", resetGame);
 
 canvas.addEventListener("mousedown", handleMouseDown);
 canvas.addEventListener("mouseup", function () {
@@ -47,11 +51,25 @@ function handleMouseMove(event) {
     placeSquare(row, column);
 }
 
+function resetGame() {
+    buttonsDiv.classList.remove("running");
+    clearInterval(interval);
+    
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid.length; j++) {
+            grid[i][j] = 0;
+        }
+    }
+
+    renderGrid();
+    canvas.addEventListener("mousedown", handleMouseDown);
+}
+
 function startGame() {
-    startButton.style.display = "none";
+    buttonsDiv.classList.add("running");
     canvas.removeEventListener("mousedown", handleMouseDown);
 
-    setInterval(() => {
+    interval = setInterval(() => {
         grid = calculateGrid().slice();
         renderGrid();
     }, 30)
